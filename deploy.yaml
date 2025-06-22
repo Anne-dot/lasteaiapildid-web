@@ -3,7 +3,7 @@ import:
 
 config:
   application: 'lasteaiapildid'
-  repository: 'git@github.com:Anne-dot/eliis-photo-downloader.git'
+  repository: 'git@github.com:Anne-dot/lasteaiapildid-web.git'
   git_tty: true
   keep_releases: 3
   

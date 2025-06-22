@@ -20,7 +20,7 @@ jobs:
           key: ${{ secrets.ZONE_SSH_KEY }}
           port: 22
           script: |
-            cd ~/domeenid/www.lasteaiapildid.ee
+            cd ~/domeenid/www.lasteaiapildid.ee/htdocs
             git pull origin main
             composer install --no-dev --optimize-autoloader
             npm ci
@@ -28,4 +28,3 @@ jobs:
             php artisan config:cache
             php artisan route:cache
             php artisan view:cache
-            php artisan migrate --force
