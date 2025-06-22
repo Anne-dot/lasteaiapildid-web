@@ -1,0 +1,31 @@
+name: Deploy to Zone.ee
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy to Zone.ee via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.ZONE_HOST }}
+          username: ${{ secrets.ZONE_USERNAME }}
+          key: ${{ secrets.ZONE_SSH_KEY }}
+          port: 22
+          script: |
+            cd ~/domeenid/www.lasteaiapildid.ee
+            git pull origin main
+            composer install --no-dev --optimize-autoloader
+            npm ci
+            npm run build
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
+            php artisan migrate --force
