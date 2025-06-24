@@ -8,7 +8,9 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-    --font-sans: Instrument Sans, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans:
+        Instrument Sans, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
 
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
@@ -29,9 +31,15 @@
     --color-secondary: var(--secondary);
     --color-secondary-foreground: var(--secondary-foreground);
 
-    --color-turquoise: var(--turquoise);
-    --color-turquoise-foreground: var(--turquoise-foreground);
-    
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+
+    --color-theme: var(--theme);
+    --color-theme-foreground: var(--theme-foreground);
+
+    --color-button-primary: var(--button-primary);
+    --color-button-primary-foreground: var(--button-primary-foreground);
+
     --color-eliis-e: var(--eliis-e);
     --color-eliis-l: var(--eliis-l);
     --color-eliis-i1: var(--eliis-i1);
@@ -89,7 +97,8 @@
     body,
     html {
         --font-sans:
-            'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+            'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+            'Segoe UI Symbol', 'Noto Color Emoji';
     }
 }
 
@@ -105,10 +114,10 @@
     --secondary: hsl(0 0% 92.1%);
     --secondary-foreground: hsl(0 0% 9%);
     --muted: hsl(0 0% 96.1%);
-    --muted-foreground: hsl(0 0% 45.1%);
+    --muted-foreground: hsl(0 0% 35%); /* Darker gray for better WCAG AA contrast */
     --accent: hsl(0 0% 96.1%);
     --accent-foreground: hsl(0 0% 9%);
-    --destructive: hsl(0 84.2% 60.2%);
+    --destructive: hsl(0 84.2% 45%); /* Darker red for better contrast */
     --destructive-foreground: hsl(0 0% 98%);
     --border: hsl(0 0% 92.8%);
     --input: hsl(0 0% 89.8%);
@@ -128,8 +137,10 @@
     --sidebar-border: hsl(0 0% 91%);
     --sidebar-ring: hsl(217.2 91.2% 59.8%);
     --sidebar: hsl(0 0% 98%);
-    --turquoise: hsl(199 100% 38%);
-    --turquoise-foreground: hsl(0 0% 100%);
+    --theme: #4a5a1f; /* Slightly lighter green for text */
+    --theme-foreground: hsl(0 0% 100%);
+    --button-primary: #a5c264; /* Original Eliis E green */
+    --button-primary-foreground: hsl(0 0% 100%);
     --eliis-e: #a5c264;
     --eliis-l: #cdce89;
     --eliis-i1: #fdc48d;
@@ -171,8 +182,10 @@
     --sidebar-border: hsl(0 0% 15.9%);
     --sidebar-ring: hsl(217.2 91.2% 59.8%);
     --sidebar: hsl(240 5.9% 10%);
-    --turquoise: hsl(199 100% 45%);
-    --turquoise-foreground: hsl(0 0% 100%);
+    --theme: #a5c264;
+    --theme-foreground: hsl(0 0% 100%);
+    --button-primary: #a5c264; /* Original Eliis E green */
+    --button-primary-foreground: hsl(0 0% 100%);
     --eliis-e: #a5c264;
     --eliis-l: #cdce89;
     --eliis-i1: #fdc48d;
@@ -186,5 +199,8 @@
     }
     body {
         @apply bg-background text-foreground;
+    }
+    html {
+        scroll-behavior: smooth;
     }
 }

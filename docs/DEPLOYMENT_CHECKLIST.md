@@ -88,10 +88,58 @@ php artisan config:cache
 exit
 ```
 
+## 🔍 Lighthouse Testing
+
+### Before Deployment (Local):
+```bash
+# Run local server
+php artisan serve
+
+# In Chrome DevTools:
+1. Open http://127.0.0.1:8000
+2. Right-click → Inspect → Lighthouse tab
+3. Run audit for key pages:
+   - Landing page (/)
+   - Privacy policy (/privaatsuspoliitika)
+4. Fix any issues:
+   - ❌ Red scores (0-49)
+   - 🟡 Yellow scores (50-89)
+   - ✅ Green scores (90-100)
+```
+
+### After Deployment (Production):
+```bash
+# Wait 5 minutes after deployment for caches to settle
+
+# Test production site:
+1. Open https://lasteaiapildid.ee
+2. Run Lighthouse again
+3. Compare scores with local
+4. Check for:
+   - Text compression enabled ✅
+   - JS/CSS minified ✅
+   - Cache headers set ✅
+   - Meta descriptions present ✅
+```
+
+### Target Scores:
+- 🎯 Performance: 70+ (90+ ideal)
+- ♿ Accessibility: 90+ (100 ideal)
+- 🏆 Best Practices: 90+
+- 🔍 SEO: 90+
+
+### Common Fixes:
+- **Low contrast**: Make text colors darker
+- **Missing meta**: Add description tags
+- **Large assets**: Optimize images
+- **No compression**: Check server config
+
 ## 🎉 Success Indicators
 - ✅ Terminal shows "Successfully deployed!"
 - ✅ Website loads without errors
 - ✅ No red error screens
+- ✅ Lighthouse scores are green/yellow
+- ✅ Production scores ≥ local scores
 
 ## 🆘 Emergency Contacts
 - 🐛 **Laravel errors:** Check `/storage/logs/laravel.log`
