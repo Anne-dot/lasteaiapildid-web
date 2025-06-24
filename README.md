@@ -31,6 +31,37 @@ npm run dev         # Frontend with HMR
 php artisan test    # Run tests
 ```
 
+## 🚢 Deployment
+
+This project uses [Deployer](https://deployer.org/) for deployment to Zone.ee hosting.
+
+### Deploy Command
+```bash
+vendor/bin/dep deploy production
+```
+
+### Other Deployment Commands
+```bash
+# Rollback to previous release
+vendor/bin/dep rollback production
+
+# SSH to server
+vendor/bin/dep ssh production
+
+# Unlock deployment (if it gets stuck)
+vendor/bin/dep deploy:unlock production
+```
+
+### What happens during deployment:
+1. Creates a new release directory
+2. Pulls latest code from GitHub
+3. Installs composer dependencies
+4. Builds frontend assets (npm install & npm run build)
+5. Runs database migrations
+6. Clears all caches
+7. Symlinks the new release to `current`
+8. Keeps last 3 releases for rollback
+
 ## 📁 Key Documentation
 
 - **[Deployment Guide](./docs/DEPLOYMENT_CHECKLIST.md)** - Production deployment
