@@ -11,7 +11,7 @@ const currentYear = new Date().getFullYear()
                 class="flex flex-col sm:flex-row flex-wrap items-center justify-between gap-4 text-sm text-muted-foreground"
             >
                 <span>© {{ currentYear }} Anne Ruusmann · Lasteaiapildid</span>
-                <span>Tehtud ❤️-ga Eestis</span>
+                <span>❤️-ga tehtud</span>
                 <Link :href="route('privacy')" class="text-theme hover:underline">Privaatsuspoliitika</Link>
                 <a href="mailto:info@lasteaiapildid.ee" class="text-theme hover:underline">info@lasteaiapildid.ee</a>
             </div>
