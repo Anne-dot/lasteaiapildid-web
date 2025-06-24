@@ -3,24 +3,21 @@
 namespace Database\Seeders;
 
 use App\Models\Bug;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class BugSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         $bugs = [
             [
-                'title' => 'Laste vahel vahetamisel salvestatakse pildid valesse kausta',
-                'problem' => 'Kui vahetate laste vahel ilma lehte värskendamata, võivad järgmise lapse pildid salvestuda eelmise lapse kausta.',
-                'workaround' => 'Vajutage F5 või värskendage lehte enne teise lapse piltide allalaadimist.',
-                'status' => 'active',
+                'title' => 'Mitme lapse puhul salvestatakse pildid vale lapse kausta',
+                'problem' => 'Probleem on selles, et kui Eliisis liikuda mitme lapse vahel ilma lehte värskendamata, ei saa laiendus järgmise lapse nime tuvastada ning pildid salvestuvad esimese lapse kausta.',
+                'workaround' => 'ALATI värskendage lehte (F5), kui vahetate Eliisis last.',
+                'status' => 'working',
                 'severity' => 'high',
                 'order' => 1,
+                'is_active' => true,
             ],
             [
                 'title' => 'Märtsi kuupäevade vale tuvastamine',
@@ -29,6 +26,7 @@ class BugSeeder extends Seeder
                 'status' => 'fixed',
                 'severity' => 'medium',
                 'order' => 2,
+                'is_active' => false,
             ],
             [
                 'title' => 'Eliis võib aeglustuda suurte vahemike puhul',
@@ -37,6 +35,25 @@ class BugSeeder extends Seeder
                 'status' => 'wontfix',
                 'severity' => 'low',
                 'order' => 3,
+                'is_active' => false,
+            ],
+            [
+                'title' => 'Laiendus jääb kinni, kui viimane element on video',
+                'problem' => 'Kui päeva viimane element on video, siis laiendus jääb kinni ega suuda järgmise kuupäeva juurde edasi liikuda.',
+                'workaround' => 'Sulgege Eliisi leht/aken ja käivitage piltide allalaadimine uuesti. Allalaadimiste ajalugu mäletab juba allalaetud kuupäevi ja jätkab sealt, kus pooleli jäi. Soovitame allalaadimise ajal aeg-ajalt kontrollida, kas laiendus edeneb.',
+                'status' => 'working',
+                'severity' => 'high',
+                'order' => 2,
+                'is_active' => true,
+            ],
+            [
+                'title' => 'Fotode uuesti allalaadimine',
+                'problem' => 'Kui olete kogemata kustutanud alla laetud fotode kausta ja soovite fotosid uuesti alla laadida, siis laiendus ei luba neid uuesti alla laadida.',
+                'workaround' => 'Kustutage Chrome\'i allalaadimiste ajalugu (chrome://downloads/ -> Clear all). Laiendus kontrollib Chrome\'i allalaadimiste ajalugu ja ei laadi uuesti alla faile, mis on seal juba kirjas. NB! Märkige kindlasti üles kuupäev või kuupäevade vahemik, mida soovite uuesti alla laadida, sest laiendus ei mäleta enam ühtegi allalaaditud kuupäeva.',
+                'status' => 'wont_fix',
+                'severity' => 'medium',
+                'order' => 3,
+                'is_active' => true,
             ],
         ];
 
