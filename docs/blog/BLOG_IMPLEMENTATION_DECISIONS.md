@@ -92,3 +92,34 @@ WHERE published_at IS NOT NULL AND published_at <= NOW()
 - Simple logic: one field controls everything
 - Laravel handles timestamp comparisons natively
 - Clean admin interface (just date picker)
+
+## User Interface Approach (2025-06-28)
+
+**Decision:** Single public blog page with context-aware admin controls
+
+### Implementation Details:
+- Public route: `/blogi` for all users
+- Admin sees additional "Add Post" button when logged in
+- Admin sees edit/delete buttons on each post
+- No separate `/admin/blog` section
+
+### UI Logic:
+```vue
+<!-- Add Post (Admin Only) -->
+<Button v-if="$page.props.auth.user?.is_admin">
+  Add Post
+</Button>
+
+<!-- Edit/Delete per post (Admin Only) -->
+<div v-if="$page.props.auth.user?.is_admin">
+  <Button @click="editPost">Edit</Button>
+  <Button @click="deletePost">Delete</Button>
+</div>
+```
+
+### Rationale:
+- **Simpler UX:** Edit posts in context where you see them
+- **Less code:** No duplicate admin views
+- **Mobile friendly:** Fewer pages to optimize
+- **Contextual:** Admin controls appear naturally in the flow
+- **Maintainable:** Single blog interface to maintain
