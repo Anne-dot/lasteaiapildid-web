@@ -23,13 +23,19 @@ git commit -m "what you changed"
 git push origin main
 
 # 2. Wait for GitHub Actions to pass (linting + tests)
-# 3. Deploy to production with Deployer
+
+# 3. Check if migrations are needed (only if you added new migrations)
+php artisan migrate:status  # Check locally first
+vendor/bin/dep migrate production  # Run ONLY if new migrations exist
+
+# 4. Deploy to production with Deployer
 vendor/bin/dep deploy production
 ```
 
 ### 🔄 What Each Tool Does:
 - **GitHub Actions**: Code quality only (linting, tests)
-- **Deployer**: Actual deployment (composer, migrations, caches, go-live)
+- **Manual Migrations**: Run only when you have new database changes
+- **Deployer**: Actual deployment (composer, assets, caches, go-live)
 
 ### ⏱️ After Pushing:
 - Get water 💧

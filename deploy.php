@@ -40,9 +40,14 @@ task('artisan:clear-config', function () {
     run('{{php}} {{release_path}}/artisan config:cache');
 });
 
+// Manual migration task - run when needed: vendor/bin/dep migrate production
+task('migrate', function () {
+    run('{{php}} {{release_or_current_path}}/artisan migrate --force');
+});
+
 before('deploy:symlink', 'build:local');
 before('deploy:symlink', 'artisan:clear-config');
-before('deploy:symlink', 'artisan:migrate');
+// Migrations removed from automatic deployment - run manually when needed
 after('deploy:failed', 'deploy:unlock');
 set('keep_releases', 3);
 
