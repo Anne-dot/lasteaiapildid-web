@@ -47,7 +47,11 @@ task('migrate', function () {
 
 before('deploy:symlink', 'build:local');
 before('deploy:symlink', 'artisan:clear-config');
-// Migrations removed from automatic deployment - run manually when needed
+
+// Override Laravel recipe to remove automatic migrations
+task('artisan:migrate', function () {
+    writeln('<info>Migrations skipped - run manually with: vendor/bin/dep migrate production</info>');
+});
 after('deploy:failed', 'deploy:unlock');
 set('keep_releases', 3);
 
