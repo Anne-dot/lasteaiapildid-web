@@ -34,5 +34,17 @@ Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Hidden admin access
+Route::middleware(['auth', 'verified'])->prefix('kiisutab-kartulit')->group(function () {
+    Route::get('/', function () {
+        return redirect()->route('admin.blog.index');
+    });
+});
+
+// Blog Admin Routes
+Route::middleware(['auth', 'verified'])->prefix('anne-blogi/admin')->name('admin.')->group(function () {
+    Route::resource('blog', \App\Http\Controllers\Admin\BlogController::class);
+});
+
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
