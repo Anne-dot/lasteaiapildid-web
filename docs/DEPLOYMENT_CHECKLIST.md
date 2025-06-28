@@ -7,41 +7,60 @@
 > - `lasteaiapildid-extension-chrome` - Chrome extension
 > - `lasteaiapildid-docs` - Business/design documentation
 
-## 🎉 AUTOMATIC DEPLOYMENT IS NOW ACTIVE!
+## 🎉 DEPLOYMENT WORKFLOW
 
 ### 🤖 How It Works:
-1. You push code to GitHub
-2. GitHub automatically deploys it
-3. Site updates in ~2 minutes
-4. You see green success banner on homepage
+1. **Push code to GitHub** → Triggers quality checks
+2. **GitHub Actions** → Runs linting and tests only
+3. **Local Deployer** → Actually deploys to production
+4. Site updates in ~2 minutes
 
 ### ✅ To Deploy:
 ```bash
+# 1. Push code to GitHub (triggers quality checks)
 git add .
 git commit -m "what you changed"
 git push origin main
+
+# 2. Wait for GitHub Actions to pass (linting + tests)
+# 3. Deploy to production with Deployer
+vendor/bin/dep deploy production
 ```
-**That's it! No more manual steps!**
+
+### 🔄 What Each Tool Does:
+- **GitHub Actions**: Code quality only (linting, tests)
+- **Deployer**: Actual deployment (composer, migrations, caches, go-live)
 
 ### ⏱️ After Pushing:
 - Get water 💧
-- Stretch 🙆  
-- Check GitHub Actions: https://github.com/[username]/lasteaiapildid-web/actions
-- After 2 min, check site: https://lasteaiapildid.ee
+- Check GitHub Actions: https://github.com/Anne-dot/lasteaiapildid-web/actions
+- Wait for green checkmark ✅
+- Run: `vendor/bin/dep deploy production`
+- Stretch 🙆 while deployment runs
+- Check site: https://lasteaiapildid.ee
 
 ### 🟢 Success Signs:
-- GitHub shows green checkmark ✓
-- Homepage shows green deployment banner
-- Banner shows current time/date
+- GitHub Actions shows green checkmark ✓
+- Deployer shows "Successfully deployed!" message
+- Homepage loads without 500 errors
 - Your changes are live!
 
 ## 🔧 Only If Something Breaks
 
 ### 😱 If deployment failed:
-1. **Check GitHub Actions** for red X
-2. **Common fixes:**
-   - Zone.eu IP whitelist might be enabled
-   - SSH key might be wrong in GitHub Secrets
+
+#### GitHub Actions Failed (Red X):
+- **Linting errors**: Fix code style issues locally
+- **Test failures**: Fix failing tests locally
+- **Re-push** after fixes
+
+#### Deployer Failed:
+1. **Database errors**: Check `.env` credentials
+   ```bash
+   ssh virt139054@lasteaiapildid.ee
+   nano ~/deployments/lasteaiapildid/shared/.env
+   ```
+2. **Permission errors**: Contact Zone.eu support
 3. **Manual deployment** (emergency only):
    ```bash
    ssh virt139054@lasteaiapildid.ee
@@ -164,9 +183,13 @@ php artisan serve
 
 ---
 
-**🎯 TL;DR - Just Push:**
+**🎯 TL;DR - Two-Step Deploy:**
 ```bash
+# Step 1: Quality check
 git push origin main
+
+# Step 2: Deploy (after GitHub Actions pass)
+vendor/bin/dep deploy production
 ```
 
-**Deployment happens automatically!** 🎉
+**GitHub Actions = Quality | Deployer = Deployment** 🎉

@@ -16,7 +16,7 @@ set('git_tty', true);
 set('http_user', 'virt139054');
 set('php', '/data03/virt139054/.zse/bin/php');
 add('shared_files', ['.env']);
-add('shared_dirs', ['storage', 'bootstrap/cache']);
+add('shared_dirs', ['storage']);
 add('writable_dirs', [
     'storage',
     'storage/app',
@@ -35,7 +35,13 @@ task('build:local', function () {
     upload('public/build/', '{{release_path}}/public/build/');
 });
 
+task('artisan:clear-config', function () {
+    run('{{php}} {{release_path}}/artisan config:clear');
+    run('{{php}} {{release_path}}/artisan config:cache');
+});
+
 before('deploy:symlink', 'build:local');
+before('deploy:symlink', 'artisan:clear-config');
 before('deploy:symlink', 'artisan:migrate');
 after('deploy:failed', 'deploy:unlock');
 set('keep_releases', 3);
