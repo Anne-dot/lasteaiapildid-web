@@ -62,7 +62,8 @@ const props = defineProps<Props>()
     <Head title="Lasteaiapildid - Fotod Eliisist ühe klikiga">
         <meta
             name="description"
-            content="Lasteaiapildid Chrome'i laiendus salvestab ja organiseerib Eliisi fotod automaatselt sinu arvutis. Tasuta kuni august 2025. Loodud Eesti vanema poolt Eesti vanematele."
+            content="Lasteaiapildid Chrome'i laiendus salvestab ja organiseerib Eliisi fotod automaatselt sinu arvutis. Loodud Eesti vanema poolt Eesti vanematele."
+            <!-- content="Lasteaiapildid Chrome'i laiendus salvestab ja organiseerib Eliisi fotod automaatselt sinu arvutis. Tasuta kuni august 2025. Loodud Eesti vanema poolt Eesti vanematele." -->
         />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -125,7 +126,7 @@ const props = defineProps<Props>()
                             </Button>
                         </a>
                         <div class="text-center">
-                            <p class="text-sm text-muted-foreground">Tasuta kuni august 2025</p>
+                            <!-- <p class="text-sm text-muted-foreground">Tasuta kuni august 2025</p> -->
                             <p class="text-sm text-muted-foreground">Edasi 0,50€/kuus</p>
                         </div>
                     </div>
