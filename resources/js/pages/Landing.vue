@@ -127,7 +127,7 @@ const props = defineProps<Props>()
                         </a>
                         <div class="text-center">
                             <!-- <p class="text-sm text-muted-foreground">Tasuta kuni august 2025</p> -->
-                            <p class="text-sm text-muted-foreground">Edasi 0,50€/kuus</p>
+                            <!-- <p class="text-sm text-muted-foreground">Edasi 0,50€/kuus</p> -->
                         </div>
                     </div>
                     <div class="mt-6 p-4 bg-muted/50 rounded-lg">
