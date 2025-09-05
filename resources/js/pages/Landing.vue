@@ -63,8 +63,8 @@ const props = defineProps<Props>()
         <meta
             name="description"
             content="Lasteaiapildid Chrome'i laiendus salvestab ja organiseerib Eliisi fotod automaatselt sinu arvutis. Loodud Eesti vanema poolt Eesti vanematele."
-            <!-- content="Lasteaiapildid Chrome'i laiendus salvestab ja organiseerib Eliisi fotod automaatselt sinu arvutis. Tasuta kuni august 2025. Loodud Eesti vanema poolt Eesti vanematele." -->
         />
+        <!-- Original content with pricing: "Lasteaiapildid Chrome'i laiendus salvestab ja organiseerib Eliisi fotod automaatselt sinu arvutis. Tasuta kuni august 2025. Loodud Eesti vanema poolt Eesti vanematele." -->
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -96,7 +96,7 @@ const props = defineProps<Props>()
                         Lasteaiamälestused on väärtuslikud!
                     </h1>
                     <p class="text-lg md:text-xl text-muted-foreground mb-6 max-w-3xl mx-auto">
-                        Nende Eliisist allalaadimine ja arvutis organiseerimine ei pea võtma palju aega.
+                        Nende Eliisist allalaadimine ja arvutis organiseerimine saab olla lihtsam ja kiirem.
                     </p>
                     <p class="text-xl md:text-2xl font-semibold text-foreground mb-8 max-w-4xl mx-auto">
                         <a
