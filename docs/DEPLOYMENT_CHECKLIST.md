@@ -188,10 +188,52 @@ php artisan serve
 - **Large assets**: Optimize images
 - **No compression**: Check server config
 
+## 💾 Database Operations
+
+### **Important:** Local vs Production Databases
+- **Local database**: Used for development and testing
+- **Production database**: Live website data - completely separate!
+- **Database content changes** (bugs, FAQs, blog posts) need to be added to production database directly
+
+### Adding Content to Production:
+```bash
+# Add bugs, FAQs, or other content to production database
+ssh virt139054@lasteaiapildid.ee
+cd /data03/virt139054/domeenid/www.lasteaiapildid.ee/htdocs/current
+
+# Example: Add a new bug
+/data03/virt139054/.zse/bin/php artisan tinker --execute="
+App\Models\Bug::create([
+    'title' => 'Bug title',
+    'problem' => 'Problem description', 
+    'workaround' => 'Workaround steps',
+    'status' => 'active',
+    'severity' => 'high',
+    'order' => 1,
+    'is_active' => true
+]);
+echo 'Added successfully!';
+"
+
+# Clear cache after database changes
+/data03/virt139054/.zse/bin/php artisan cache:clear
+```
+
+### View Production Database Content:
+```bash
+# List all active bugs
+/data03/virt139054/.zse/bin/php artisan tinker --execute="
+App\Models\Bug::active()->ordered()->get()->each(function(\$bug) { 
+    echo \"- {\$bug->title} (order: {\$bug->order})\n\"; 
+});
+"
+```
+
 ## 🎉 Success Indicators
 - ✅ Terminal shows "Successfully deployed!"
 - ✅ Website loads without errors
 - ✅ No red error screens
+- ✅ Database content changes appear after cache clear
 - ✅ Lighthouse scores are green/yellow
 - ✅ Production scores ≥ local scores
 

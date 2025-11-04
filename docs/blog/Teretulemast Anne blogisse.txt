@@ -1,0 +1,7 @@
+Tere, armas lugeja!
+
+Mul on hea meel, et oled minu blogisse jõudnud. Samal ajal on ka veidi hirmus, sest ma lubasin endale siin oma protsessi ja mõtteid ausalt kajastada ehk siis ilma ilustamata. Mul on väga palju ideid, millest kirjutada, kuid kuna öeldakse, et "edasiminek on täiusest tähtsam", siis alustan lihtsalt kuskilt.
+
+Ma sain esimese toimiva testversiooni valmis ja Chrome'i veebipoodi üles umbes kaks kuud tagasi. Tänaseni on sellel vaid kaks kasutajat: üks sõber, kes aitas testida ja andis väärtuslikku tagasisidet, ja mina ise. Ma tahtsin facebooki kaudu seda teiste vanematega ka testimiseks jagada, kuid pärast kolme gruppi kirjutamist blokeeris facebook minu konto ära. Omaette ironiseerisin, et päris hirmus spämmer olen jah. Aga oli nagu oli. 
+
+Suvi oli täies hoos ja 
