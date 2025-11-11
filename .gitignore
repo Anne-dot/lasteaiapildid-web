@@ -1,25 +1,28 @@
-/.phpunit.cache
-/bootstrap/ssr
-/node_modules
-/public/build
-/public/hot
-/public/storage
-/storage/*.key
-/storage/pail
-/vendor
+# Astro build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# environment variables
 .env
 .env.backup
 .env.production
 .env.config
-.phpactor.json
-.phpunit.result.cache
-Homestead.json
-Homestead.yaml
-npm-debug.log
-yarn-error.log
-/auth.json
-/.fleet
-/.idea
-/.nova
-/.vscode
-/.zed
+
+# macOS-specific files
+.DS_Store
+
+# IDE settings
+.idea/
+.vscode/
+.fleet/
+.nova/
+.zed/
