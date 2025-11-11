@@ -26,4 +26,7 @@ pnpm-debug.log*
 .fleet/
 .nova/
 .zed/
+
+# Temporary files and browser-saved HTML
 temp/
+*_files/

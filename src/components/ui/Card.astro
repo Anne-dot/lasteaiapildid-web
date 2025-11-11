@@ -1,0 +1,16 @@
+---
+// src/components/ui/Card.astro
+// Reusable card wrapper - Astro official docs pattern
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div class:list={['bg-card text-card-foreground rounded-xl border shadow-sm max-w-4xl mx-auto', className]}>
+  <div class="p-6 md:p-8">
+    <slot />
+  </div>
+</div>
