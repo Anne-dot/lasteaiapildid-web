@@ -33,4 +33,17 @@ const faqs = defineCollection({
   })
 });
 
-export const collections = { bugs, features, faqs };
+const guide = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/data/guide" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    icon: z.string(),
+    order: z.number(),
+    image: z.string().optional(),
+    link: z.string().optional(),
+    linkText: z.string().optional(),
+  })
+});
+
+export const collections = { bugs, features, faqs, guide };

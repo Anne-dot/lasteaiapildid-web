@@ -15,6 +15,9 @@ const plannedFeatures = allFeatures.filter(f => f.data.status === 'planned');
 const faqs = (await getCollection('faqs'))
   .filter(faq => !faq.data.question.startsWith('_'))
   .sort((a, b) => a.data.order - b.data.order);
+
+// Guide steps
+const guideSteps = (await getCollection('guide')).sort((a, b) => a.data.order - b.data.order);
 ---
 
 <BaseLayout>
@@ -97,6 +100,62 @@ const faqs = (await getCollection('faqs'))
             <a href="#privaatsuspoliitika" class="text-theme underline hover:opacity-80">privaatsuspoliitika</a>
             lõigus.
           </p>
+        </div>
+      </Card>
+    </div>
+  </section>
+
+  <!-- Guide Section -->
+  <section id="kasutusjuhend" class="py-4 scroll-mt-20">
+    <div class="container mx-auto px-4">
+      <Card>
+        <div class="text-center">
+          <Icon name="lucide:book-open" class="w-16 h-16 text-theme mx-auto mb-6" />
+          <h2 class="text-3xl font-bold mb-4 tracking-tight text-theme">Kasutusjuhend</h2>
+          <p class="text-muted-foreground mb-8">Samm-sammult juhend piltide allalaadimiseks</p>
+        </div>
+        <div class="max-w-3xl mx-auto space-y-4">
+          {guideSteps.map((step) => (
+            <Collapsible title={step.data.title} defaultOpen={step.data.order === 1}>
+              <Icon slot="icon" name={step.data.icon} class="h-5 w-5" />
+              <div class="pl-8 space-y-3">
+                {step.data.link ? (
+                  <div class="space-y-2">
+                    <p class="text-muted-foreground">
+                      <a
+                        href={step.data.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-button-primary text-button-primary-foreground font-medium hover:bg-button-primary/90 transition-colors mr-2"
+                      >
+                        <Icon name="lucide:external-link" class="w-4 h-4" />
+                        {step.data.linkText || 'Ava link'}
+                      </a>
+                      {step.data.description.split('\n')[0]}
+                    </p>
+                    {step.data.description.split('\n').slice(1).map((line: string) => (
+                      <p class="text-muted-foreground">{line}</p>
+                    ))}
+                  </div>
+                ) : (
+                  <p class="text-muted-foreground whitespace-pre-line">{step.data.description}</p>
+                )}
+                {step.data.image && (
+                  <img
+                    src={step.data.image}
+                    alt={step.data.title}
+                    class="rounded-lg border shadow-sm max-w-full"
+                  />
+                )}
+              </div>
+            </Collapsible>
+          ))}
+          <div class="mt-8 p-4 bg-muted/50 rounded-lg">
+            <p class="text-sm text-muted-foreground text-center">
+              <strong>Probleemid?</strong> Vaata <a href="#kkk" class="text-theme underline hover:opacity-80">KKK sektsiooni</a> või
+              <a href="#vead" class="text-theme underline hover:opacity-80">teadaolevaid vigu</a>.
+            </p>
+          </div>
         </div>
       </Card>
     </div>
