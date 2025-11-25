@@ -1,0 +1,75 @@
+---
+// src/components/ui/Collapsible.astro
+// Native HTML details/summary - no JavaScript needed
+
+interface Props {
+  title: string;
+  variant?: 'default' | 'bug-high' | 'bug-medium' | 'bug-low' | 'feature-high' | 'feature-medium' | 'feature-low';
+  defaultOpen?: boolean;
+}
+
+const { title, variant = 'default', defaultOpen = false } = Astro.props;
+
+const variantClasses = {
+  default: 'border-border',
+  // Bug severity colors
+  'bug-high': 'border-orange-200 bg-orange-50 dark:border-orange-900 dark:bg-orange-950',
+  'bug-medium': 'border-yellow-200 bg-yellow-50 dark:border-yellow-900 dark:bg-yellow-950',
+  'bug-low': 'border-blue-200 bg-blue-50 dark:border-blue-900 dark:bg-blue-950',
+  // Feature priority colors
+  'feature-high': 'border-green-200 bg-green-50 dark:border-green-900 dark:bg-green-950',
+  'feature-medium': 'border-yellow-200 bg-yellow-50 dark:border-yellow-900 dark:bg-yellow-950',
+  'feature-low': 'border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-950',
+};
+
+const iconColors = {
+  default: 'text-muted-foreground',
+  'bug-high': 'text-orange-600',
+  'bug-medium': 'text-yellow-600',
+  'bug-low': 'text-blue-600',
+  'feature-high': 'text-green-600',
+  'feature-medium': 'text-yellow-600',
+  'feature-low': 'text-gray-600',
+};
+---
+
+<details
+  class:list={['collapsible group rounded-lg border transition-colors', variantClasses[variant]]}
+  open={defaultOpen}
+>
+  <summary
+    class="flex w-full cursor-pointer items-center justify-between p-4 text-left list-none hover:bg-muted/50 transition-colors"
+  >
+    <div class="flex items-center gap-3">
+      <span class:list={['flex-shrink-0', iconColors[variant]]}>
+        <slot name="icon" />
+      </span>
+      <span class="font-medium">{title}</span>
+    </div>
+    <svg
+      class="h-5 w-5 text-muted-foreground transition-transform duration-200 group-open:rotate-180"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="m6 9 6 6 6-6"></path>
+    </svg>
+  </summary>
+  <div class="px-4 pb-4 pt-2">
+    <slot />
+  </div>
+</details>
+
+<style>
+  /* Remove default marker/arrow */
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  summary::marker {
+    display: none;
+  }
+</style>

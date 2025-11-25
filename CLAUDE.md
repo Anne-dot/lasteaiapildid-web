@@ -51,6 +51,21 @@ npm run build    # Build for production
 npm run preview  # Preview production build
 ```
 
+## Accessing Laravel Archive
+
+Original Laravel code is in `laravel-archived` branch. Access without switching branches:
+
+```bash
+# View file content
+git show laravel-archived:resources/js/pages/Landing.vue
+
+# List files in directory
+git show laravel-archived:resources/js/pages/
+
+# Pipe to tools
+git show laravel-archived:path/to/file | head -100
+```
+
 ## Related Repositories
 
 - **lasteaiapildid-docs** - Shared documentation, business docs

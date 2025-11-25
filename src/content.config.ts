@@ -24,4 +24,13 @@ const features = defineCollection({
   })
 });
 
-export const collections = { bugs, features };
+const faqs = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/data/faqs" }),
+  schema: z.object({
+    question: z.string(),
+    answer: z.string(),
+    order: z.number(),
+  })
+});
+
+export const collections = { bugs, features, faqs };

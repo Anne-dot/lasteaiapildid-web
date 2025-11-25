@@ -2,11 +2,19 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Card from '../components/ui/Card.astro';
 import Badge from '../components/ui/Badge.astro';
+import Collapsible from '../components/ui/Collapsible.astro';
 import { Icon } from 'astro-icon/components';
 import { getCollection } from 'astro:content';
 
-const bugs = await getCollection('bugs');
-const features = await getCollection('features');
+const bugs = (await getCollection('bugs')).sort((a, b) => a.data.order - b.data.order);
+const allFeatures = (await getCollection('features')).sort((a, b) => a.data.order - b.data.order);
+const existingFeatures = allFeatures.filter(f => f.data.status === 'existing');
+const plannedFeatures = allFeatures.filter(f => f.data.status === 'planned');
+
+// FAQs - filter out placeholder entries (question starts with "_")
+const faqs = (await getCollection('faqs'))
+  .filter(faq => !faq.data.question.startsWith('_'))
+  .sort((a, b) => a.data.order - b.data.order);
 ---
 
 <BaseLayout>
@@ -74,20 +82,330 @@ const features = await getCollection('features');
     </Card>
   </section>
 
-  <!-- Placeholder for other sections -->
-  <div class="container mx-auto px-4 py-8">
-    <h2 class="text-2xl font-bold mb-4">Bugs ({bugs.length})</h2>
-    <ul class="mb-8 space-y-2">
-      {bugs.map((bug) => (
-        <li class="text-foreground">{bug.data.title}</li>
-      ))}
-    </ul>
+  <!-- Privacy Section -->
+  <section class="py-4">
+    <div class="container mx-auto px-4">
+      <Card>
+        <div class="text-center">
+          <Icon name="lucide:shield" class="w-16 h-16 text-theme mx-auto mb-6" />
+          <h2 class="text-3xl font-bold mb-6 tracking-tight text-theme">
+            Teie laste privaatsus on mulle oluline
+          </h2>
+          <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Olen ise kahe lasteaialapse ema ja privaatsus on minu jaoks väga oluline. Fotod ei lähe
+            kunagi minu serveritesse. Kõik toimub 100% teie arvutis. Lähemalt saate lugeda
+            <a href="#privaatsuspoliitika" class="text-theme underline hover:opacity-80">privaatsuspoliitika</a>
+            lõigus.
+          </p>
+        </div>
+      </Card>
+    </div>
+  </section>
 
-    <h2 class="text-2xl font-bold mb-4">Features ({features.length})</h2>
-    <ul class="space-y-2">
-      {features.map((feature) => (
-        <li class="text-foreground">{feature.data.title}</li>
-      ))}
-    </ul>
-  </div>
+  <!-- About Section -->
+  <section id="minust" class="py-4 scroll-mt-20">
+    <div class="container mx-auto px-4">
+      <Card>
+        <div class="text-center">
+          <Icon name="lucide:user-circle" class="w-16 h-16 text-theme mx-auto mb-6" />
+          <h2 class="text-3xl font-bold mb-4 tracking-tight text-theme">Minust</h2>
+          <p class="text-xl text-muted-foreground">Anne Ruusmann</p>
+        </div>
+        <div class="space-y-8 mt-8">
+          <div class="border-b pb-8">
+            <h3 class="text-xl font-semibold mb-3 text-theme">Kuidas Lasteaiapildid sündis</h3>
+            <p class="text-muted-foreground text-justify">
+              Olen kahe väikese lapse ema, kellele meeldib automatiseerida igavaid korduvaid
+              tegevusi. Selle teksti kirjutamise ajal lõpetasin just Kuressaare Ametikooli Noorem
+              tarkvararendaja eriala. Lasteaiapildid sai aga alguse hoopis isikliku probleemi
+              lahendamisest. Tükk aega tagasi kurtis mees Eliisist laste piltide ühekaupa
+              allalaadimise üle. Umbes pool aastat hiljem tegin enda pere jaoks prototüübi, mis
+              tõmbas pooleteise tunni jooksul mõlema lapse 4 kuu pildid alla. Samal ajal nautisime
+              perega saunaõhtut. Kaks kuud hiljem jäi mul lõputöö kaitsmise ja laste suvepuhkuse
+              vahele üks nädal ning otsustasin selle kõigile kättesaadavaks teha. Ma väärin oma
+              laste pilte ka siis, kui ma selle nimel tuhandeid klikke teha ei taha. Ja sina
+              samuti.
+            </p>
+          </div>
+
+          <div class="border-b pb-8">
+            <h3 class="text-xl font-semibold mb-3 text-theme">Tehniline teekond</h3>
+            <p class="text-muted-foreground text-justify">
+              Minu tee tarkvara arendamise poole sai alguse CNC operaatorina töötamisest. Nägin
+              seal optimeerimise ja automatiseerimise võimalusi ja vajadusi ning hakkasin omal
+              käel Pythoniga pusima. Seejärel sain kaks last, kuid programmeerimispisik oli juba
+              sees. Lasteaiapildid on minu esimene "avalik" rakendus. Selle arendamine ja
+              avaldamine on olnud põnev ja õpetlik teekond.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold mb-3 text-theme">Minu missioon</h3>
+            <p class="text-muted-foreground text-justify">
+              Mina usun, et kõik igavad ja korduvad tegevused, mida saab ära automatiseerida,
+              tuleb automatiseerida. Lapsevanematena on meil niigi palju kohustusi ja ülesandeid.
+              Las need klikid jäävad masinatele ja aeg lapsevanematele. Iga lahendus algab kellegi
+              jaoks piisavalt suurest probleemist.
+            </p>
+          </div>
+        </div>
+      </Card>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="kkk" class="container mx-auto px-4 py-4 scroll-mt-20">
+    <Card>
+      <div class="text-center">
+        <Icon name="lucide:help-circle" class="w-16 h-16 text-theme mx-auto mb-6" />
+        <h2 class="text-3xl font-bold mb-12 tracking-tight text-theme">Korduma Kippuvad Küsimused</h2>
+      </div>
+      <div class="max-w-3xl mx-auto space-y-4">
+        {faqs.length === 0 ? (
+          <div class="text-center py-8">
+            <p class="text-muted-foreground mb-2">Küsimusi pole veel esitatud.</p>
+            <p class="text-muted-foreground">
+              Sul on küsimus?
+              <a href="mailto:info@lasteaiapildid.ee" class="text-theme underline hover:opacity-80">
+                Kirjuta mulle → info@lasteaiapildid.ee
+              </a>
+            </p>
+          </div>
+        ) : (
+          <>
+            {faqs.map((faq) => (
+              <Collapsible title={faq.data.question}>
+                <div class="pl-8">
+                  <p class="text-muted-foreground">{faq.data.answer}</p>
+                </div>
+              </Collapsible>
+            ))}
+            <div class="mt-8 text-center">
+              <p class="text-muted-foreground">
+                Ei leidnud vastust oma küsimusele?
+                <a href="mailto:info@lasteaiapildid.ee" class="text-theme underline hover:opacity-80">
+                  Kirjuta mulle → info@lasteaiapildid.ee
+                </a>
+              </p>
+            </div>
+          </>
+        )}
+      </div>
+    </Card>
+  </section>
+
+  <!-- Privacy Policy Section -->
+  <section id="privaatsuspoliitika" class="container mx-auto px-4 py-4 scroll-mt-20">
+    <Card>
+      <div class="text-center">
+        <Icon name="lucide:file-text" class="w-16 h-16 text-theme mx-auto mb-6" />
+        <h2 class="text-3xl font-bold mb-12 tracking-tight text-theme">Privaatsuspoliitika</h2>
+      </div>
+      <div class="space-y-8">
+        <!-- Short summary -->
+        <div class="bg-card rounded-xl border shadow-sm p-6">
+          <h3 class="text-xl font-semibold mb-3">Lühidalt</h3>
+          <p class="text-muted-foreground">
+            See laiendus on loodud ühelt Eesti lapsevanemalt teistele. Ma mõistan, kui oluline
+            on teie laste fotode privaatsus.
+          </p>
+        </div>
+
+        <!-- What it DOES / DOESN'T do -->
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="bg-theme/5 border-theme/20 rounded-xl border p-6">
+            <h3 class="text-xl font-semibold mb-4 text-theme">✅ Mida see laiendus TEEB</h3>
+            <div class="space-y-3 text-muted-foreground">
+              <p>→ Töötab 100% teie arvutis</p>
+              <p>→ Laadib fotod otse teie brauserist teie arvutisse</p>
+              <p>→ EI salvesta teie fotosid ega isiklikke andmeid</p>
+            </div>
+          </div>
+
+          <div class="bg-destructive/5 border-destructive/20 rounded-xl border p-6">
+            <h3 class="text-xl font-semibold mb-4 text-destructive">❌ Mida see laiendus EI TEE</h3>
+            <div class="space-y-3 text-muted-foreground">
+              <p>→ EI saada teie fotosid minu serverisse</p>
+              <p>→ EI jälgi, milliseid fotosid te alla laadite</p>
+              <p>→ EI kogu teie isikuandmeid</p>
+              <p>→ EI kasuta analüütikat ega jälgimistehnoloogiaid</p>
+              <p>→ EI müü ega jaga teie andmeid</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Technical details -->
+        <div class="bg-card rounded-xl border shadow-sm p-6">
+          <h3 class="text-xl font-semibold mb-4">Tehnilised üksikasjad</h3>
+          <p class="text-muted-foreground mb-4">Laiendus kasutab järgmisi brauseri õigusi:</p>
+          <ul class="list-disc list-inside space-y-2 ml-4 text-muted-foreground">
+            <li><strong class="text-foreground">activeTab</strong> - et lugeda fotosid praeguselt Eliisi lehelt</li>
+            <li><strong class="text-foreground">downloads</strong> - et salvestada fotod teie arvutisse</li>
+            <li><strong class="text-foreground">notifications</strong> - et näidata allalaadimise edenemist</li>
+          </ul>
+          <p class="mt-4 text-sm text-muted-foreground">
+            Tulevikus võib lisanduda <strong>storage</strong> õigus teie eelistuste meeldejätmiseks (nt allalaadimise kausta asukoht).
+          </p>
+          <p class="mt-2 text-muted-foreground font-semibold">
+            Kõik toimub teie brauseris. Mitte mingeid väliseid ühendusi.
+          </p>
+        </div>
+
+        <!-- Contact -->
+        <div class="text-center">
+          <p class="text-muted-foreground">
+            Küsimusi privaatsuse kohta?
+            <a href="mailto:info@lasteaiapildid.ee" class="text-theme underline hover:opacity-80">
+              info@lasteaiapildid.ee
+            </a>
+          </p>
+        </div>
+      </div>
+    </Card>
+  </section>
+
+  <!-- Bugs Section -->
+  <section id="vead" class="py-4 scroll-mt-20">
+    <div class="container mx-auto px-4">
+      <Card>
+        <div class="text-center">
+          <Icon name="lucide:bug" class="w-16 h-16 text-theme mx-auto mb-6" />
+          <h2 class="text-3xl font-bold mb-12 tracking-tight text-theme">
+            Teadaolevad vead ja lahendused
+          </h2>
+        </div>
+        <div class="max-w-3xl mx-auto space-y-4">
+          {bugs.map((bug) => (
+            <Collapsible title={bug.data.title} variant={`bug-${bug.data.severity}` as 'bug-high' | 'bug-medium' | 'bug-low'}>
+              <Icon slot="icon" name="lucide:circle-alert" class="h-5 w-5" />
+              <div class="space-y-3 pl-8">
+                <div>
+                  <p class="font-semibold text-sm mb-1">Probleem:</p>
+                  <p class="text-muted-foreground">{bug.data.problem}</p>
+                </div>
+                <div>
+                  <p class="font-semibold text-sm mb-1">Lahendus:</p>
+                  <p class="text-muted-foreground">{bug.data.workaround}</p>
+                </div>
+                <div>
+                  <p class="text-sm text-muted-foreground">
+                    <strong>Staatus: </strong>
+                    {bug.data.status === 'active' && 'Aktiivne viga'}
+                    {bug.data.status === 'fixed' && 'Parandatud (ootab kinnitust)'}
+                    {bug.data.status === 'working' && 'Töös (planeeritud järgmisesse versiooni)'}
+                    {bug.data.status === 'wont_fix' && 'Ei paranda (süsteemi piirang)'}
+                  </p>
+                </div>
+              </div>
+            </Collapsible>
+          ))}
+
+          <div class="text-center mt-8">
+            <p class="text-muted-foreground mb-2">Leidsid uue vea?</p>
+            <a
+              href="mailto:info@lasteaiapildid.ee"
+              class="inline-flex items-center gap-2 text-theme underline hover:opacity-80"
+            >
+              <Icon name="lucide:mail" class="w-5 h-5" />
+              Anna mulle teada → info@lasteaiapildid.ee
+            </a>
+          </div>
+        </div>
+      </Card>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="funktsioonid" class="container mx-auto px-4 py-4 scroll-mt-20">
+    <Card>
+      <div class="text-center">
+        <Icon name="lucide:sparkles" class="w-16 h-16 text-theme mx-auto mb-6" />
+        <h2 class="text-3xl font-bold mb-12 tracking-tight text-theme">Funktsioonid</h2>
+      </div>
+      <div class="max-w-3xl mx-auto space-y-8">
+        <!-- Existing Features -->
+        {existingFeatures.length > 0 && (
+          <div>
+            <h3 class="text-xl font-semibold mb-4 text-theme">Olemasolevad funktsioonid</h3>
+            <div class="space-y-4">
+              {existingFeatures.map((feature) => (
+                <Collapsible
+                  title={feature.data.title}
+                  variant={`feature-${feature.data.priority}` as 'feature-high' | 'feature-medium' | 'feature-low'}
+                >
+                  <Icon slot="icon" name="lucide:sparkles" class="h-5 w-5" />
+                  <div class="pl-8">
+                    <p class="text-muted-foreground whitespace-pre-wrap">{feature.data.description}</p>
+                  </div>
+                </Collapsible>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Planned Features -->
+        {plannedFeatures.length > 0 && (
+          <div>
+            <h3 class="text-xl font-semibold mb-4 text-theme">Planeeritud funktsioonid</h3>
+            <div class="space-y-4">
+              {plannedFeatures.map((feature) => (
+                <Collapsible
+                  title={feature.data.title}
+                  variant={`feature-${feature.data.priority}` as 'feature-high' | 'feature-medium' | 'feature-low'}
+                >
+                  <Icon slot="icon" name="lucide:sparkles" class="h-5 w-5" />
+                  <div class="pl-8">
+                    <p class="text-muted-foreground mb-2">{feature.data.description}</p>
+                    <p class="text-sm text-muted-foreground">
+                      <strong>Prioriteet: </strong>
+                      {feature.data.priority === 'high' && <span class="text-green-600">Kõrge</span>}
+                      {feature.data.priority === 'medium' && <span class="text-yellow-600">Keskmine</span>}
+                      {feature.data.priority === 'low' && <span class="text-gray-600">Madal</span>}
+                    </p>
+                  </div>
+                </Collapsible>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div class="text-center mt-8">
+          <p class="text-muted-foreground mb-2">On idee uue funktsiooni jaoks?</p>
+          <a
+            href="mailto:info@lasteaiapildid.ee"
+            class="inline-flex items-center gap-2 text-theme underline hover:opacity-80"
+          >
+            <Icon name="lucide:mail" class="w-5 h-5" />
+            Jaga minuga → info@lasteaiapildid.ee
+          </a>
+        </div>
+      </div>
+    </Card>
+  </section>
+
+  <!-- TODO: FAQ section -->
+
+  <!-- CTA Section (at the end) -->
+  <section class="container mx-auto px-4 py-4">
+    <Card>
+      <div class="text-center">
+        <Icon name="lucide:heart" class="w-12 h-12 text-theme mx-auto mb-4" />
+        <h2 class="text-2xl md:text-3xl font-bold mb-4 tracking-tight text-theme">
+          Tehtud Eesti vanema poolt Eesti vanematele
+        </h2>
+        <p class="text-lg text-muted-foreground mb-8">
+          Sest igal vanemal on õigus oma lapse lasteaiamälestustele.
+        </p>
+        <a
+          href="https://chromewebstore.google.com/detail/eliisi-piltide-allalaadij/hdmklnffodiiniickmbagjodgieoceip"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-all h-10 rounded-md bg-button-primary hover:bg-button-primary/90 text-white px-8 py-6 text-lg shadow-xs focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]">
+            Tõmba laiendus
+          </button>
+        </a>
+      </div>
+    </Card>
+  </section>
 </BaseLayout>
