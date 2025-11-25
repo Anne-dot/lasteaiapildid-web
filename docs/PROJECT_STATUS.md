@@ -22,22 +22,26 @@
 ### Landing Page Sections
 - ✅ Hero section
 
-## In Progress (Issue #22)
+## In Progress
 
-Landing page sections remaining:
-1. ⏳ Privacy section
-2. ⏳ FAQ section
-3. ⏳ Bugs section
-4. ⏳ Features section
-5. ⏳ About section
-6. ⏳ Privacy Policy section
+- ⏳ DNS switch (Cloudflare → GitHub Pages)
+- ⏳ Zone.ee cancellation
+- ⏳ Enable GitHub Pages in repo settings (Settings → Pages → Source: GitHub Actions)
 
-## Not Started
+## Completed (Issue #22)
 
-- GitHub Pages deployment setup
-- GitHub Actions workflow
-- DNS switch (Cloudflare → GitHub Pages)
-- Zone.ee cancellation
+Landing page sections:
+- ✅ Privacy section
+- ✅ FAQ section (5 FAQs based on real user feedback)
+- ✅ Bugs section
+- ✅ Features section
+- ✅ About section
+- ✅ Privacy Policy section
+- ✅ Kasutusjuhend (user guide) section with 7 expandable steps
+- ✅ GitHub Actions workflow (deploy.yml)
+- ✅ Astro config for GitHub Pages
+- ✅ Facebook link in footer
+- ✅ Lighthouse 100/100
 
 ## Tech Stack
 
