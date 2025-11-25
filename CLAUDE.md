@@ -8,10 +8,11 @@ All tasks, commands, and guidelines specified in that documentation should be ap
 ## Session Start Checklist
 
 **Before starting ANY work:**
-1. Check GitHub Issues: `gh issue list`
-2. Read issue comments - they contain decisions and context
-3. Check open PRs: `gh pr list`
-4. Review recent commits: `git log --oneline -10`
+1. Read `docs/PROJECT_STATUS.md` - current migration state
+2. Check GitHub Issues: `gh issue list`
+3. Read issue comments - they contain decisions and context
+4. Check open PRs: `gh pr list`
+5. Review recent commits: `git log --oneline -10`
 
 GitHub repo is the primary source of truth for:
 - Current tasks and priorities (Issues)

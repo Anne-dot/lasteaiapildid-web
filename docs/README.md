@@ -1,22 +1,25 @@
 # Technical Documentation
 
-This directory contains **technical documentation** for the Laravel web application.
+This directory contains **technical documentation** for the Astro web application.
 
-## What belongs here:
-- Deployment guides and checklists
+## Current Documentation
+
+- `PROJECT_STATUS.md` - Migration status and current state
+- `WEB_TROUBLESHOOTING_LOG.md` - Historical Laravel issues (archived)
+
+## What belongs here
+
+- Deployment guides (GitHub Pages)
 - Technical troubleshooting logs
-- API documentation (when applicable)
-- Database schema documentation
-- Technical architecture decisions
+- Architecture decisions
+- Build and development guides
 
-## What does NOT belong here:
-- Business requirements
-- Design decisions
-- Marketing content
-- FAQ content planning
+## What does NOT belong here
 
-Those documents belong in the `lasteaiapildid-docs` repository.
+- Business requirements → `lasteaiapildid-docs` repository
+- Design decisions → `lasteaiapildid-docs` repository
+- Marketing content → `lasteaiapildid-docs` repository
 
-## Current Documentation:
-- `DEPLOYMENT_CHECKLIST.md` - Step-by-step deployment guide
-- `WEB_TROUBLESHOOTING_LOG.md` - Development issues and solutions
+## Related
+
+- **Laravel workflow** (archived): `~/Automation/work-projects/best-practices/laravel-zone-deployer-workflow.md`
