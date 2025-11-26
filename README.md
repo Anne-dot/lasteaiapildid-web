@@ -29,6 +29,8 @@ src/
 └── styles/         # Tailwind theme
 ```
 
-## Related
+## Links
 
+- [Website](https://lasteaiapildid.ee)
 - [Chrome Extension](https://chromewebstore.google.com/detail/eliisi-piltide-allalaadij/hdmklnffodiiniickmbagjodgieoceip)
+- [Facebook](https://www.facebook.com/profile.php?id=61583120622659)
