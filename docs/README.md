@@ -12,6 +12,3 @@ Technical documentation for the Astro web application.
 - Technical troubleshooting
 - Architecture decisions
 
-## Related
-
-- Business/design docs → [lasteaiapildid-docs](https://github.com/Anne-dot/lasteaiapildid-docs)

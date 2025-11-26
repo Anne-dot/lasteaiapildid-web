@@ -31,5 +31,4 @@ src/
 
 ## Related
 
-- [Chrome Extension](https://github.com/Anne-dot/lasteaiapildid-extension-chrome)
-- [Documentation](https://github.com/Anne-dot/lasteaiapildid-docs)
+- [Chrome Extension](https://chromewebstore.google.com/detail/eliisi-piltide-allalaadij/hdmklnffodiiniickmbagjodgieoceip)
