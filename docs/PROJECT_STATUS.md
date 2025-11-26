@@ -2,14 +2,8 @@
 
 ## Current State (November 2025)
 
-**Migration**: Laravel+Zone → Astro+GitHub Pages
-**Goal**: Save 168€/year (14€/month Zone hosting → free GitHub Pages)
-
-## In Progress
-
-- ⏳ Enable GitHub Pages (Settings → Pages → Source: GitHub Actions)
-- ⏳ DNS switch (Cloudflare A records → GitHub Pages IPs)
-- ⏳ Zone.ee cancellation
+**Migration**: Laravel+Zone → Astro+GitHub Pages ✅ COMPLETE
+**Saved**: 168€/year (14€/month Zone hosting → free GitHub Pages)
 
 ## Completed
 
@@ -29,8 +23,11 @@
 - ✅ Astro 5 + Tailwind CSS 4
 - ✅ Content Collections (bugs, features, faqs, guide)
 - ✅ GitHub Actions workflow (deploy.yml)
-- ✅ Custom domain config (CNAME)
+- ✅ GitHub Pages enabled
+- ✅ Custom domain (lasteaiapildid.ee)
+- ✅ DNS via Cloudflare → GitHub Pages
 - ✅ Email routing via Cloudflare
+- ✅ Zone.ee hosting cancelled
 
 ## Tech Stack
 
@@ -41,6 +38,7 @@
 | Icons | astro-icon + Lucide |
 | Content | Astro Content Collections |
 | Hosting | GitHub Pages |
+| DNS/CDN | Cloudflare |
 
 ## References
 
